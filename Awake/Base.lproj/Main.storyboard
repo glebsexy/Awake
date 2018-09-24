@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -14,17 +15,43 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Awake" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="Turn Off the Timer" id="5kV-Vb-QxS">
+                                        <menuItem title="Left-click activates Awake for" tag="3" enabled="NO" id="tRv-g1-ws4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="10 minutes" id="Qwn-X1-XcI">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="removeTimer:" target="Voe-Tx-rLC" id="kbl-KY-CEU"/>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="CpM-Yw-aMN"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="3 minutes" id="Qwn-X1-XcI">
+                                        <menuItem title="30 minutes" id="TSp-wc-DnC">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="awakeTimer1:" target="Voe-Tx-rLC" id="Q74-mf-Sko"/>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="TUk-3p-WyR"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="1 hour" id="UPL-mc-Co2">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="0Jq-ZJ-ybj"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="3 hours" id="N91-as-DUk">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="BTy-dd-uEL"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="8 hours" id="sN9-Jb-mHL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="ayX-Oz-T3R"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Indefinitely" state="on" id="qLy-6h-IbJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="selectTimeInterval:" target="Voe-Tx-rLC" id="Zm5-g1-ip8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="aUJ-66-unx"/>

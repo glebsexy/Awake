@@ -15,6 +15,8 @@
 		0D47A3AF211FE5C10056EC73 /* StatusIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D47A3AE211FE5C10056EC73 /* StatusIcon.swift */; };
 		0D47A3B1211FE7490056EC73 /* AwakeStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D47A3B0211FE7490056EC73 /* AwakeStatusItem.swift */; };
 		0D47A3B3211FE7760056EC73 /* AwakeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D47A3B2211FE7760056EC73 /* AwakeController.swift */; };
+		0DC0D60121574FF300C0227B /* AwakeActivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0D60021574FF300C0227B /* AwakeActivator.swift */; };
+		0DC0D605215780B200C0227B /* TimeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC0D604215780B200C0227B /* TimeConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		0D47A3AE211FE5C10056EC73 /* StatusIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIcon.swift; sourceTree = "<group>"; };
 		0D47A3B0211FE7490056EC73 /* AwakeStatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeStatusItem.swift; sourceTree = "<group>"; };
 		0D47A3B2211FE7760056EC73 /* AwakeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeController.swift; sourceTree = "<group>"; };
+		0DC0D60021574FF300C0227B /* AwakeActivator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeActivator.swift; sourceTree = "<group>"; };
+		0DC0D604215780B200C0227B /* TimeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				0D47A3B0211FE7490056EC73 /* AwakeStatusItem.swift */,
 				0D47A3B2211FE7760056EC73 /* AwakeController.swift */,
 				0D47A3AE211FE5C10056EC73 /* StatusIcon.swift */,
+				0DC0D604215780B200C0227B /* TimeConstants.swift */,
+				0DC0D60021574FF300C0227B /* AwakeActivator.swift */,
 				0D47A386211FE3600056EC73 /* Assets.xcassets */,
 				0D47A388211FE3600056EC73 /* Main.storyboard */,
 				0D47A38B211FE3600056EC73 /* Info.plist */,
@@ -260,10 +266,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DC0D60121574FF300C0227B /* AwakeActivator.swift in Sources */,
 				0D47A3B1211FE7490056EC73 /* AwakeStatusItem.swift in Sources */,
 				0D47A3AF211FE5C10056EC73 /* StatusIcon.swift in Sources */,
 				0D47A383211FE35F0056EC73 /* AppDelegate.swift in Sources */,
 				0D47A3B3211FE7760056EC73 /* AwakeController.swift in Sources */,
+				0DC0D605215780B200C0227B /* TimeConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

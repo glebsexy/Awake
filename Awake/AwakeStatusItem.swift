@@ -8,29 +8,28 @@
 
 import Cocoa
 
-private extension Selector {
-    static let leftMouseDown = #selector(AwakeStatusItem.toggleAwake(_:))
-    static let rightMouseDown = #selector(AwakeStatusItem.showMeMenu(_:))
-}
-
 protocol AwakeStatusItemDelegate {
     func toggleAwake()
     func showMenu()
 }
 
 class AwakeStatusItem: NSObject {
-    fileprivate var delegate: AwakeStatusItemDelegate
-    fileprivate var statusItem: NSStatusItem
+    fileprivate let statusItemDelegate: AwakeStatusItemDelegate
+    fileprivate let statusItem: NSStatusItem
     
     init(delegate: AwakeStatusItemDelegate, statusItem: NSStatusItem) {
-        self.delegate = delegate
+        self.statusItemDelegate = delegate
         self.statusItem = statusItem
         super.init()
         statusItem.highlightMode = false
+        
+        // Make button send actions to this AwakeStatusItem
         if let button = statusItem.button {
             button.target = self
-            button.action = .leftMouseDown
+            button.action = #selector(self.statusBarButtonClicked(_:))
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
+        
         showClosedStatusIcon()
     }
     
@@ -41,24 +40,18 @@ class AwakeStatusItem: NSObject {
     func showOpenStatusIcon() {
         statusItem.button!.image = StatusIcon.open.image
     }
-
-}
-
-// NSStatusBarButton methods
-extension AwakeStatusItem {
     
-    @objc func toggleAwake(_ sender: AnyObject!) {
-        delegate.toggleAwake()
+//    When NSStatusBarButton is clicked
+    @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
+        let event = NSApp.currentEvent!
+        
+        if event.type == NSEvent.EventType.rightMouseUp {
+            // Show menu on the right click
+            statusItemDelegate.showMenu()
+        } else {
+            // Toggle awake on the left click
+            statusItemDelegate.toggleAwake()
+        }
     }
-    
-    @objc func showMeMenu(_ sender: AnyObject!) {
-        delegate.showMenu()
-    }
-    
-}
 
-extension NSStatusBarButton {
-    override open func rightMouseDown(with theEvent: NSEvent) {
-        _ = target!.perform(.rightMouseDown)
-    }
 }
