@@ -14,10 +14,12 @@ enum AwakeStatus {
     case inactive
 }
 
+/// Callback on the Awake session lifecycle events.
 protocol AwakeActivatorDelegate {
     func awakeStatusChange()
 }
 
+/// The class responsible for the Awake session lifecycle. Handles the activation, deactivation and all changes of the session.
 class AwakeActivator {
     fileprivate let reasonForActivity = "Mac stays Awake"
     fileprivate var assertionID: IOPMAssertionID = IOPMAssertionID(0)
@@ -35,6 +37,7 @@ class AwakeActivator {
         return IOPMAssertionCreateWithName(type as CFString?, level, reasonForActivity as CFString?, &assertionID)
     }
     
+    /// Activates a new Awake session.
     func activate() {
         deactivate()
         guard createAssertion() == kIOReturnSuccess else {
@@ -46,24 +49,33 @@ class AwakeActivator {
         awakeActivatorDelegate?.awakeStatusChange()
     }
     
-    func activateFor(timeInterval: Double) {
+    
+    /// Activates the timer for a specified amount of time.
+    ///
+    /// - Parameter timeInterval: time interval in minutes
+    func activateFor(minutes: Double) {
         activate()
         if activeTimer != nil {
             activeTimer!.invalidate()
         }
-        guard timeInterval != 0 else {
+        guard minutes != 0 else {
             return
         }
 
-        activeTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { activeTimer in
+        activeTimer = Timer.scheduledTimer(withTimeInterval: minutes, repeats: false) { activeTimer in
             self.deactivate()
         }
     }
     
-    func changeTimeInterval(timeInterval: Double) {
+    
+    /// Changes current time interval setting to a new one.
+    ///
+    /// - Parameter timeInterval: new time interval in minutes
+    func changeTimeInterval(minutes: Double) {
         // TODO: change timer
     }
     
+    /// Deactivates the currently active Awake session.
     func deactivate() {
         guard status == .active else {
             return
@@ -73,6 +85,7 @@ class AwakeActivator {
             return
         }
         status = .inactive
+        activeTimer?.invalidate()
         print("Deactivated!")
         awakeActivatorDelegate?.awakeStatusChange()
     }

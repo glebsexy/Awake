@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// You don't have to think to understand that this where the app lifecycle happens.
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -16,16 +17,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var menu: NSMenu!
     
+    /// That's easy to understand that this method is executed when the app starts
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let selectedIndex = getSelectedTimeIndexSetting()
         awakeController = AwakeController(delegate: self, statusItem: statusItem, timeIntervalIndex: selectedIndex)
         setSelectedTime(index: selectedIndex)
     }
     
+    /// The app wants to quit, turn all things off fast AF!
     func applicationWillTerminate(_ aNotification: Notification) {
         awakeController?.shutdown()
     }
     
+    /// Set the title of the main menu depending on wether Awake is active or not
     private func setMenuTitle() {
         let item = menu.item(withTag: 3)
         if awakeController?.isActive ?? false {
@@ -35,6 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    /// Put a checkmark next to the right menu item to show it's selected.
+    ///
+    /// - Parameter index: the index of the item that needs to be selected.
     private func setSelectedTime(index: Int) {
         for menuItem in menu.items {
             menuItem.state = .off
@@ -42,15 +49,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.item(withTitle: TimeConstants.IntervalsStrings[index])?.state = .on
     }
     
+    /// Find the index of the previously selected time. A method with a very long name.
+    ///
+    /// - Returns: index of the previously selected time from the internal storage.
     private func getSelectedTimeIndexSetting() -> Int {
         return UserDefaults.standard.integer(forKey: TimeConstants.IntervalStorage)
     }
     
+    /// Write the newly selected time to the internal storage.
+    ///
+    /// - Parameter index: index of the currently selected time to be written.
     private func writeSelectedTimeSetting(index: Int) {
         UserDefaults.standard.set(index, forKey: TimeConstants.IntervalStorage)
     }
     
-    // Set Awake timer for the next several minutes
+    /// The time interval is selected, act upon!
     @IBAction func selectTimeInterval(_ sender: NSMenuItem) {
         guard let index = TimeConstants.IntervalsStrings.lastIndex(of: sender.title) else {
             print("Time interval not found!")

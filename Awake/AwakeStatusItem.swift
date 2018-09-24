@@ -13,10 +13,16 @@ protocol AwakeStatusItemDelegate {
     func showMenu()
 }
 
+/// Controls the behaviour of the status item and interactions with it.
 class AwakeStatusItem: NSObject {
     fileprivate let statusItemDelegate: AwakeStatusItemDelegate
     fileprivate let statusItem: NSStatusItem
     
+    /// Initialize the new AwakeStatusItem.
+    ///
+    /// - Parameters:
+    ///   - delegate: AwakeStatusItemDelegate to send callbacks to.
+    ///   - statusItem: the main status item of the app.
     init(delegate: AwakeStatusItemDelegate, statusItem: NSStatusItem) {
         self.statusItemDelegate = delegate
         self.statusItem = statusItem
@@ -33,15 +39,19 @@ class AwakeStatusItem: NSObject {
         showClosedStatusIcon()
     }
     
+    /// Awake is Inactive
     func showClosedStatusIcon() {
         statusItem.button!.image = StatusIcon.closed.image
     }
     
+    /// Awake is Active
     func showOpenStatusIcon() {
         statusItem.button!.image = StatusIcon.open.image
     }
-    
-//    When NSStatusBarButton is clicked
+
+    /// NSStatusBarButton has been clicked
+    ///
+    /// - Parameter sender: NSStatusBarButton that sends the click event
     @objc func statusBarButtonClicked(_ sender: NSStatusBarButton) {
         let event = NSApp.currentEvent!
         
