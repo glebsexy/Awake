@@ -62,7 +62,7 @@ class AwakeActivator {
             return
         }
 
-        activeTimer = Timer.scheduledTimer(withTimeInterval: minutes, repeats: false) { activeTimer in
+        activeTimer = Timer.scheduledTimer(withTimeInterval: minutes * 60, repeats: false) { activeTimer in
             self.deactivate()
         }
     }
@@ -72,7 +72,18 @@ class AwakeActivator {
     ///
     /// - Parameter timeInterval: new time interval in minutes
     func changeTimeInterval(minutes: Double) {
-        // TODO: change timer
+        guard status == .active else {
+            return
+        }
+        guard activeTimer != nil else {
+            return
+        }
+        let timerLeft = activeTimer!.fireDate.timeIntervalSinceNow
+        if timerLeft < minutes {
+            activateFor(minutes: minutes - (timerLeft / 60))
+        } else {
+            deactivate()
+        }
     }
     
     /// Deactivates the currently active Awake session.
